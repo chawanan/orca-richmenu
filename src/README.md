@@ -1,6 +1,6 @@
-# src
+# Orca Shabu Online
 
-> My smashing Nuxt.js project
+> สั่งอาหารกับออร์ก้า ง่ายๆ
 
 ## Build Setup
 

@@ -10,8 +10,10 @@
 <script>
   import AppBar from '../components/AppBar.vue'
   import SideBar from '../components/SideBar.vue'
+  import Vue from 'vue'
 
   export default {
+    data: () => ({}),
     components: {
       AppBar, SideBar
     },
@@ -20,7 +22,7 @@
 </script>
 
 <style lang="scss">
-  #__layout {
+  html {
     font-family: 'Prompt', sans-serif;
   }
 
@@ -36,7 +38,7 @@
 
   .cart-order {
     // font-size: 1em;
-    font-size: calc(1em + 2vw);
+    font-size: calc(1em + 1vw);
     font-weight: bold;
   }
 

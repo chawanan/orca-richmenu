@@ -4,7 +4,6 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _2d760b14 = () => interopDefault(import('..\\..\\pages\\donburi.vue' /* webpackChunkName: "pages_donburi" */))
-const _13d2fd7a = () => interopDefault(import('..\\..\\pages\\inspire.vue' /* webpackChunkName: "pages_inspire" */))
 const _0da3904b = () => interopDefault(import('..\\..\\pages\\jpfood.vue' /* webpackChunkName: "pages_jpfood" */))
 const _07e44dc8 = () => interopDefault(import('..\\..\\pages\\lunchbox.vue' /* webpackChunkName: "pages_lunchbox" */))
 const _3142b41c = () => interopDefault(import('..\\..\\pages\\shabudelivery.vue' /* webpackChunkName: "pages_shabudelivery" */))
@@ -31,10 +30,6 @@ export const routerOptions = {
     path: "/donburi",
     component: _2d760b14,
     name: "donburi"
-  }, {
-    path: "/inspire",
-    component: _13d2fd7a,
-    name: "inspire"
   }, {
     path: "/jpfood",
     component: _0da3904b,

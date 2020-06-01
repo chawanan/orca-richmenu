@@ -14,7 +14,7 @@
           :lg="2"
         >
           <v-card class="pa-0 v-card__img-width ma-0" 
-            flat outlined height="100%"
+            flat outlined height="100%" 
           >  
             <v-img lazy-src 
               height="auto"

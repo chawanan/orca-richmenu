@@ -3,7 +3,7 @@
   <v-app-bar
       flat
       dark
-      fixed
+      app
     >
       <!-- title bar ORCA -->
       <v-toolbar-title>
@@ -44,8 +44,8 @@
           <!-- card title and subtitle -->
           <v-list>
             <v-list-item>
-              <v-list-item-avatar>
-                <img src="img/orca shabu avatar.png" alt="orca shabu">
+              <v-list-item-avatar size="54" tile>
+                <img src="img/normal/orca shabu avatar.png" alt="orca shabu">
               </v-list-item-avatar>
 
               <v-list-item-content>
@@ -108,7 +108,7 @@
           <!-- cart action -->
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn :disabled="(itemsInCart > 0) ? false : true" rounded color="primary" dark @click="menu=false">ส่งออเดอร์</v-btn>
+            <v-btn :disabled="(itemsInCart > 0) ? false : true" rounded color="primary" dark @click="sendOrder">ส่งออเดอร์</v-btn>
           </v-card-actions>
         </v-card>
       </v-menu>
@@ -123,20 +123,12 @@ export default {
   data () {
       return {
         menu: false,
-        // drawer: false,
-        // items: [
-        //   { title: 'ข้าวกล่อง', icon: 'mdi-rice', path: '/lunchbox', src: 'img/lunchbox.png' },
-        //   { title: 'ข้าวด้ง', icon: 'mdi-rice', path: '/donburi', src: 'img/donburi.png' },
-        //   { title: 'ซูชิ', icon: 'mdi-rice', path: '/sushi', src: 'img/sushi.png' },
-        //   { title: 'ชาบู', icon: 'mdi-rice', path: '/shabudelivery', src: 'img/shabu.png' },
-        //   { title: 'อาหารญี่ปุ่น', icon: 'mdi-rice', path: '/jpfood', src: 'img/sashimi.png' },
-        // ],
+        totalPrice: 0,
      }
     },
 
     computed: {
       ...mapGetters({
-        // products: 'allProducts',    //getDonburiList
         orders: 'cartProducts'      //get list in cart
       }),
       itemsInCart () {
@@ -145,7 +137,8 @@ export default {
       },
       total () {
         return this.orders.reduce((total, p) => {
-          return total + p.price * p.quantity
+          this.totalPrice = total + p.price * p.quantity
+          return this.totalPrice
         }, 0)
       }
     },
@@ -155,6 +148,28 @@ export default {
         'addToCart',
         'deleteFromCart'
       ]),
+      sendOrder () {
+        console.log(this.$liff.isLoggedIn())
+        console.log(this.$liff.getOS())
+
+        let orderString = 'แจ้งสั่งอาหาร รายการดังนี้\n'
+        this.orders.forEach(order => orderString += '  ' + order.title + ' จำนวน ' + order.quantity + ' ที่\n')
+        orderString += 'ยอดรวม ' + this.totalPrice + '.-'
+
+        console.log(orderString)
+
+        this.$liff.sendMessages([
+          {
+            type: 'text',
+            text: orderString
+          }
+        ]).then(function () {
+          window.alert('Message sent')
+          liff.closeWindow();
+        }).catch(function (error) {
+          window.alert('Error sending message: ' + error)
+        })
+      },
     }
 }
 </script>
